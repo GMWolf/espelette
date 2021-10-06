@@ -3,4 +3,9 @@ project(espelette)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(espelette main.cpp)
+add_subdirectory(glad)
+add_subdirectory(external/glm)
+include(cmake/glfw.cmake)
+include(cmake/stb.cmake)
+
+add_subdirectory(espelette)
