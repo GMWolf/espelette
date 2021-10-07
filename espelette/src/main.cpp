@@ -20,8 +20,10 @@ void App::init()
 
 void App::update()
 {
+    drawList.view(0, 0, width, height);
+
     setImage(0, image);
-    drawList.rect({-0.5, -0.5}, {0.5, 0.5}, {255, 255, 255, 255});
+    drawList.rect({10, 10}, {150, 150}, {255, 255, 255, 255});
     submit(drawList);
     drawList.clear();
 }

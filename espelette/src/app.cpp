@@ -38,8 +38,15 @@ int run(AppInterface& app)
 
     while(!glfwWindowShouldClose(window))
     {
+        int width, height;
+        glfwGetWindowSize(window, &width, &height);
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        glViewport(0, 0, width, height);
+
+        app.width = width;
+        app.height = height;
 
         app.update();
 

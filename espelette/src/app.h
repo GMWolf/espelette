@@ -8,6 +8,8 @@
 class AppInterface
 {
 public:
+    int width, height;
+
     virtual void init(){};
     virtual void update(){};
     virtual void shutdown(){};

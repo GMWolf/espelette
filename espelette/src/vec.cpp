@@ -2,7 +2,6 @@
 // Created by felix on 06/10/2021.
 //
 
-
 #include "vec.h"
 #include <cstdlib>
 

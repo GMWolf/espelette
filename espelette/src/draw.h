@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 #include "vec.h"
 
 struct Vertex
@@ -19,9 +20,12 @@ struct Vertex
 
 struct DrawList
 {
+    glm::mat4 projMat;
     Vec<Vertex> vertices;
     Vec<uint32_t> elements;
     void rect(const glm::vec2& a, const glm::vec2& b, const glm::u8vec4& col);
+
+    void view(float left, float top, float right, float bottom);
 
     void clear();
 };
