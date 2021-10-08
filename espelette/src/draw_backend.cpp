@@ -33,9 +33,17 @@ void submit(DrawList& drawList)
     glUseProgram(drawData.shader);
     glUniform1i(drawData.textureLocation, 0);
 
-    glUniformMatrix4fv(drawData.matLocation, 1, false, glm::value_ptr(drawList.projMat));
+    for(const DrawCommand& command : drawList.commands)
+    {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, command.imageHandle);
 
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(drawList.elements.size()), GL_UNSIGNED_INT, nullptr);
+        glUniformMatrix4fv(drawData.matLocation, 1, false, glm::value_ptr(command.projMat));
+
+        glDrawElementsBaseVertex(GL_TRIANGLES, static_cast<GLsizei>(command.count), GL_UNSIGNED_INT,
+                                 reinterpret_cast<void*>(command.indexOffset), static_cast<GLint>(command.baseVertex));
+    }
+
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -41,12 +41,6 @@ void freeImage(Image *image)
     delete image;
 }
 
-void setImage(uint32_t unit, const Image *image)
-{
-    glActiveTexture(GL_TEXTURE0 + unit);
-    glBindTexture(GL_TEXTURE_2D, image->handle);
-}
-
 ImageData loadImageData(const char *path)
 {
     ImageData image{};

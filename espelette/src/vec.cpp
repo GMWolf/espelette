@@ -37,9 +37,10 @@ const void *RawVec::data() const
 
 void RawVec::reserve(size_t newSize)
 {
-    if (newSize > elementCount)
+    if (newSize > capacity)
     {
         memory = static_cast<char*>(realloc(memory, newSize * elementSize));
+        capacity = newSize;
     }
 }
 
@@ -67,4 +68,8 @@ void *RawVec::allocBack() {
 
 void RawVec::clear() {
     elementCount = 0;
+}
+
+void *RawVec::getBack() {
+    return get(elementCount - 1);
 }

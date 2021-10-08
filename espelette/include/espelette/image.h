@@ -21,8 +21,6 @@ struct Image
     uint32_t handle;
 };
 
-void setImage(uint32_t slot, const Image* image);
-
 Image* loadImage(const char* path);
 ImageData loadImageData(const char* path);
 

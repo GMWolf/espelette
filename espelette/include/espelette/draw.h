@@ -10,6 +10,7 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 #include "vec.h"
+#include "image.h"
 
 struct Vertex
 {
@@ -18,16 +19,34 @@ struct Vertex
     glm::u8vec4 col;
 };
 
+struct DrawCommand
+{
+    uint32_t count;
+    uint32_t indexOffset;
+    uint32_t baseVertex;
+    glm::mat4 projMat;
+    uint32_t imageHandle;
+};
+
+using element_t = uint32_t;
+
 struct DrawList
 {
-    glm::mat4 projMat;
     Vec<Vertex> vertices;
-    Vec<uint32_t> elements;
-    void rect(const glm::vec2& a, const glm::vec2& b, const glm::u8vec4& col);
+    Vec<element_t> elements;
+    Vec<DrawCommand> commands;
+    DrawCommand* command {};
 
-    void view(float left, float top, float right, float bottom);
+    DrawList();
+
+    void rect(const glm::vec2& a, const glm::vec2& b, const glm::u8vec4& col);
+    void setView(float left, float top, float right, float bottom);
+    void setImage(const Image* image);
 
     void clear();
+
+    void newCommand();
+    void flushCommand();
 };
 
 void drawInit();

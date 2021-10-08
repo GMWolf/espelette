@@ -21,6 +21,7 @@ public:
 
     void* get(size_t index);
     [[nodiscard]] const void* get(size_t index) const;
+    void* getBack();
 
     void* data();
     [[nodiscard]] const void* data() const;
@@ -30,6 +31,7 @@ public:
     void reserve(size_t newSize);
     void resize(size_t newSize);
     void clear();
+
 
     void* allocBack();
 
@@ -44,10 +46,12 @@ class Vec : public RawVec
 public:
     Vec() : RawVec(sizeof(T))
     {}
-    void push_back(const T& t)
-    {
-        *static_cast<T*>(allocBack()) = t;
-    }
-};
 
+    T* begin() { return static_cast<T*>(get(0)); }
+    T* end() { return static_cast<T*>(get(size())); }
+
+    void push_back(const T& t) { *static_cast<T*>(allocBack()) = t; }
+
+    T& back(){ return *static_cast<T*>(getBack()); }
+};
 #endif //ESPELETTE_VEC_H
