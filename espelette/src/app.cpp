@@ -7,7 +7,6 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <cstdio>
-#include "draw.h"
 #include <stb_image.h>
 
 static void setWindowIcon(GLFWwindow* window, const char* file)
@@ -20,6 +19,9 @@ static void setWindowIcon(GLFWwindow* window, const char* file)
     }
     stbi_image_free(logoImage.pixels);
 }
+
+void drawInit();
+void drawShutdown();
 
 int run(AppInterface& app)
 {

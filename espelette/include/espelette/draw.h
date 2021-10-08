@@ -52,9 +52,6 @@ struct DrawList
     void flushCommand();
 };
 
-void drawInit();
-void drawShutdown();
-
 void submit(DrawList& drawList);
 
 #endif //ESPELETTE_DRAW_H
