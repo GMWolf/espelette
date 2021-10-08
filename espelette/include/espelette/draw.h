@@ -10,7 +10,8 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 #include "vec.h"
-#include "image.h"
+
+struct Image;
 
 struct Vertex
 {

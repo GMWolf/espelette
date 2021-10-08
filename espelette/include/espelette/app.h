@@ -8,7 +8,8 @@
 class AppInterface
 {
 public:
-    int width, height;
+    int width {};
+    int height {};
 
     virtual void init(){};
     virtual void update(){};
