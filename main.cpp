@@ -22,12 +22,9 @@ void App::update()
 {
     drawList.setView(0, 0, width, height);
 
-    drawList.setImage(image);
-    drawList.rect({10, 10}, {150, 150}, {255, 255, 255, 255});
-
-    drawList.setImage(logoImage);
-    drawList.rect({160, 10}, {310, 150}, {255, 255, 255, 255});
-    drawList.rect({320, 10}, {470, 150}, {255, 255, 255, 255});
+    drawList.sprite(image, {10, 10});
+    drawList.sprite(logoImage, {170, 10});
+    drawList.sprite(logoImage, {320, 10}, glm::vec2(logoImage->width, logoImage->height) * 1.25f);
 
     submit(drawList);
     drawList.clear();

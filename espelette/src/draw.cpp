@@ -87,3 +87,14 @@ DrawList::DrawList()
     newCommand();
 }
 
+void DrawList::sprite(const Image *image, const glm::vec2 &pos, const glm::vec2& size)
+{
+    setImage(image);
+    rect(pos, pos + size, {255, 255, 255, 255});
+}
+
+void DrawList::sprite(const Image *image, const glm::vec2& pos)
+{
+    sprite(image, pos, {image->width, image->height});
+}
+

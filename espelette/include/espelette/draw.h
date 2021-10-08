@@ -40,6 +40,8 @@ struct DrawList
     DrawList();
 
     void rect(const glm::vec2& a, const glm::vec2& b, const glm::u8vec4& col);
+    void sprite(const Image* image, const glm::vec2& pos);
+    void sprite(const Image* image, const glm::vec2& pos, const glm::vec2& size);
     void setView(float left, float top, float right, float bottom);
     void setImage(const Image* image);
 
