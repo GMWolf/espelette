@@ -8,7 +8,18 @@
 #include <GLFW/glfw3.h>
 #include <cstdio>
 #include "draw.h"
-#include "image.h"
+#include <stb_image.h>
+
+static void setWindowIcon(GLFWwindow* window, const char* file)
+{
+    GLFWimage logoImage;
+    logoImage.pixels = stbi_load(file, &logoImage.width, &logoImage.height, nullptr, 4);
+    if (logoImage.width > 0)
+    {
+        glfwSetWindowIcon(window, 1, &logoImage);
+    }
+    stbi_image_free(logoImage.pixels);
+}
 
 int run(AppInterface& app)
 {
@@ -30,18 +41,7 @@ int run(AppInterface& app)
         return 1;
     }
 
-    ImageData logoImage = loadImageData("logo.png");
-    if (logoImage.width > 0)
-    {
-        GLFWimage logoGlfwImage
-        {
-            .width = logoImage.width,
-            .height = logoImage.height,
-            .pixels = logoImage.data
-        };
-        glfwSetWindowIcon(window, 1, &logoGlfwImage);
-    }
-
+    setWindowIcon(window, "logo.png");
 
     glfwMakeContextCurrent(window);
     gladLoadGL(glfwGetProcAddress);
