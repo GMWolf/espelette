@@ -24,6 +24,8 @@ Image *loadImage(const char *path)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageData.width, imageData.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData.data);
     glGenerateMipmap(GL_TEXTURE_2D);
 
+
+
     auto* image = new Image {
         .width = static_cast<uint16_t>(imageData.width),
         .height = static_cast<uint16_t>(imageData.height),

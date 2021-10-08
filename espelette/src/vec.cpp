@@ -56,14 +56,15 @@ void RawVec::resize(size_t newSize)
     elementCount = newSize;
 }
 
-void *RawVec::allocBack() {
-    if (elementCount == capacity)
+void *RawVec::allocBack(size_t n) {
+    if (elementCount + n > capacity)
     {
         grow();
     }
 
-    elementCount++;
-    return get(elementCount - 1);
+    void* ret = get(elementCount);
+    elementCount += n;
+    return ret;
 }
 
 void RawVec::clear() {

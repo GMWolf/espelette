@@ -10,17 +10,19 @@ void DrawList::rect(const glm::vec2 &a, const glm::vec2 &b, const glm::u8vec4& c
 {
     uint32_t baseIndex = vertices.size() - command->baseVertex;
 
-    vertices.push_back({ .pos = {a.x, a.y}, .uv = {0, 0}, .col = col });
-    vertices.push_back({ .pos = {a.x, b.y}, .uv = {0, 1}, .col = col });
-    vertices.push_back({ .pos = {b.x, a.y}, .uv = {1, 0}, .col = col });
-    vertices.push_back({ .pos = {b.x, b.y}, .uv = {1, 1}, .col = col });
+    auto verts = vertices.alloc_back(4);
+    verts[0] = { .pos = {a.x, a.y}, .uv = {0, 0}, .col = col };
+    verts[1] = { .pos = {a.x, b.y}, .uv = {0, 1}, .col = col };
+    verts[2] = { .pos = {b.x, a.y}, .uv = {1, 0}, .col = col };
+    verts[3] = { .pos = {b.x, b.y}, .uv = {1, 1}, .col = col };
 
-    elements.push_back(baseIndex + 0);
-    elements.push_back(baseIndex + 1);
-    elements.push_back(baseIndex + 2);
-    elements.push_back(baseIndex + 1);
-    elements.push_back(baseIndex + 2);
-    elements.push_back(baseIndex + 3);
+    auto els = elements.alloc_back(6);
+    els[0] = baseIndex + 0;
+    els[1] = baseIndex + 1;
+    els[2] = baseIndex + 2;
+    els[3] = baseIndex + 1;
+    els[4] = baseIndex + 2;
+    els[5] = baseIndex + 3;
 
     command->count += 6;
 }

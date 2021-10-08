@@ -33,7 +33,7 @@ public:
     void clear();
 
 
-    void* allocBack();
+    void* allocBack(size_t n = 1);
 
 private:
     void grow();
@@ -51,6 +51,7 @@ public:
     T* end() { return static_cast<T*>(get(size())); }
 
     void push_back(const T& t) { *static_cast<T*>(allocBack()) = t; }
+    T* alloc_back(size_t n) { return static_cast<T*>(RawVec::allocBack(n)); };
 
     T& back(){ return *static_cast<T*>(getBack()); }
 };
