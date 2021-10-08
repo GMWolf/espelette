@@ -7,18 +7,26 @@
 
 #include <cstdint>
 
+struct ImageData
+{
+    int width;
+    int height;
+    unsigned char* data;
+};
+
 struct Image
 {
     uint16_t width;
     uint16_t height;
-
     uint32_t handle;
 };
 
 void setImage(uint32_t slot, const Image* image);
 
 Image* loadImage(const char* path);
+ImageData loadImageData(const char* path);
 
 void freeImage(Image* image);
+void freeImageData(ImageData& imageData);
 
 #endif //ESPELETTE_IMAGE_H

@@ -11,13 +11,9 @@
 
 Image *loadImage(const char *path)
 {
-    int width;
-    int height;
-    int channels;
-    stbi_uc* imageData = stbi_load(path, &width, &height, &channels, 4);
+    ImageData imageData = loadImageData(path);
 
     GLuint texture;
-
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -25,15 +21,18 @@ Image *loadImage(const char *path)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageData.width, imageData.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData.data);
     glGenerateMipmap(GL_TEXTURE_2D);
-    stbi_image_free(imageData);
 
-    return new Image {
-        .width = static_cast<uint16_t>(width),
-        .height = static_cast<uint16_t>(height),
+    auto* image = new Image {
+        .width = static_cast<uint16_t>(imageData.width),
+        .height = static_cast<uint16_t>(imageData.height),
         .handle = static_cast<uint16_t>(texture)
     };
+
+    freeImageData(imageData);
+
+    return image;
 }
 
 void freeImage(Image *image)
@@ -46,4 +45,18 @@ void setImage(uint32_t unit, const Image *image)
 {
     glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(GL_TEXTURE_2D, image->handle);
+}
+
+ImageData loadImageData(const char *path)
+{
+    ImageData image{};
+    int channels;
+    image.data = stbi_load(path, &image.width, &image.height, &channels, 4);
+    return image;
+}
+
+void freeImageData(ImageData &imageData)
+{
+    stbi_image_free(imageData.data);
+    imageData.data = nullptr;
 }

@@ -8,6 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <cstdio>
 #include "draw.h"
+#include "image.h"
 
 int run(AppInterface& app)
 {
@@ -28,6 +29,19 @@ int run(AppInterface& app)
         glfwTerminate();
         return 1;
     }
+
+    ImageData logoImage = loadImageData("logo.png");
+    if (logoImage.width > 0)
+    {
+        GLFWimage logoGlfwImage
+        {
+            .width = logoImage.width,
+            .height = logoImage.height,
+            .pixels = logoImage.data
+        };
+        glfwSetWindowIcon(window, 1, &logoGlfwImage);
+    }
+
 
     glfwMakeContextCurrent(window);
     gladLoadGL(glfwGetProcAddress);
