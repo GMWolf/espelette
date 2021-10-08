@@ -9,3 +9,6 @@ include(cmake/glfw.cmake)
 include(cmake/stb.cmake)
 
 add_subdirectory(espelette)
+
+add_executable(test main.cpp)
+target_link_libraries(test espelette)

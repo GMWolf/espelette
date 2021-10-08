@@ -18,3 +18,4 @@ public:
 int run(AppInterface& app);
 
 #endif //ESPELETTE_APP_H
+

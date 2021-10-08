@@ -72,6 +72,8 @@ int run(AppInterface& app)
 
     drawShutdown();
 
+    glfwDestroyWindow(window);
+
     glfwTerminate();
     return 0;
 }

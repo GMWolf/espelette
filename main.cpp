@@ -1,6 +1,4 @@
-#include "app.h"
-#include "image.h"
-#include "draw.h"
+#include <espelette.h>
 
 class App : public AppInterface
 {
