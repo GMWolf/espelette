@@ -5,18 +5,18 @@
 #ifndef ESPELETTE_APP_H
 #define ESPELETTE_APP_H
 
-class AppInterface
-{
-public:
-    int width {};
-    int height {};
+#include <glm/vec2.hpp>
 
-    virtual void init(){};
-    virtual void update(){};
-    virtual void shutdown(){};
+struct AppInterface
+{
+    void (*init)(){};
+    void (*shutdown)(){};
+    void (*update)(){};
 };
 
-int run(AppInterface& app);
+int run(const AppInterface& app);
+
+glm::vec2 windowSize();
 
 #endif //ESPELETTE_APP_H
 

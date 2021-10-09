@@ -12,6 +12,13 @@
 #include "input_state.h"
 #include "draw_backend.h"
 
+struct AppGlobals
+{
+    glm::vec2 windowSize;
+};
+
+static AppGlobals appGlobals;
+
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     switch(action)
@@ -38,7 +45,7 @@ static void setWindowIcon(GLFWwindow* window, const char* file)
     stbi_image_free(logoImage.pixels);
 }
 
-int run(AppInterface& app)
+int run(const AppInterface& app)
 {
     if(!glfwInit())
     {
@@ -76,13 +83,13 @@ int run(AppInterface& app)
 
         int width, height;
         glfwGetWindowSize(window, &width, &height);
+
+        appGlobals.windowSize = {width, height};
+
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glViewport(0, 0, width, height);
-
-        app.width = width;
-        app.height = height;
 
         app.update();
 
@@ -102,5 +109,10 @@ int run(AppInterface& app)
 
     glfwTerminate();
     return 0;
+}
+
+glm::vec2 windowSize()
+{
+    return appGlobals.windowSize;
 }
 
