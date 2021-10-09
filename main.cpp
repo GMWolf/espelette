@@ -49,6 +49,8 @@ AppFlow update()
 int main()
 {
     run({
+        .title = "test",
+        .icon = "logo.png",
         .windowSize = {1280, 720},
         .init = init,
         .shutdown = shutdown,

@@ -57,7 +57,9 @@ int run(const AppInterface& app)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
 
-    GLFWwindow* window = glfwCreateWindow(app.windowSize.x, app.windowSize.y, "Espelette", nullptr, nullptr);
+    const char* title = app.title ? app.title : "Espelette";
+
+    GLFWwindow* window = glfwCreateWindow(app.windowSize.x, app.windowSize.y, title, nullptr, nullptr);
     if (!window)
     {
         fprintf(stderr, "Failed to create window");
@@ -67,7 +69,8 @@ int run(const AppInterface& app)
 
     glfwSetKeyCallback(window, keyCallback);
 
-    setWindowIcon(window, "logo.png");
+    const char* iconPath = app.icon ? app.icon : "logo.png";
+    setWindowIcon(window, iconPath);
 
     glfwMakeContextCurrent(window);
     gladLoadGL(glfwGetProcAddress);

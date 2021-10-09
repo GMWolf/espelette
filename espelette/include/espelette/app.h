@@ -15,6 +15,8 @@ enum class AppFlow
 
 struct AppInterface
 {
+    const char* title {};
+    const char* icon {};
     glm::ivec2 windowSize{};
     void (*init)(){};
     void (*shutdown)(){};
