@@ -1,4 +1,3 @@
-# espelette
-lightweight game engine
 
-![espelette](logo.png)
+# ![espelette](logo.png) Espelette 
+lightweight game engine
