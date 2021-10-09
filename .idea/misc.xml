@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
+  <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$/espelette/include" />
+      <file path="$PROJECT_DIR$/espelette/src" />
+      <file path="$PROJECT_DIR$/glad/include" />
+      <file path="$PROJECT_DIR$/glad/src" />
+    </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/external/glfw" />
+      <file path="$PROJECT_DIR$/external/glm" />
+      <file path="$PROJECT_DIR$/external/stb" />
+    </libraryRoots>
+    <excludeRoots>
+      <file path="$PROJECT_DIR$/build" />
+    </excludeRoots>
+  </component>
+</project>
