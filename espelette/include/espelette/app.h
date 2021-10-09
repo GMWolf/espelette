@@ -9,6 +9,7 @@
 
 struct AppInterface
 {
+    glm::ivec2 windowSize{};
     void (*init)(){};
     void (*shutdown)(){};
     void (*update)(){};

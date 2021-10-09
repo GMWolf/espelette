@@ -57,7 +57,7 @@ int run(const AppInterface& app)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
 
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Espelette", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(app.windowSize.x, app.windowSize.y, "Espelette", nullptr, nullptr);
     if (!window)
     {
         fprintf(stderr, "Failed to create window");
