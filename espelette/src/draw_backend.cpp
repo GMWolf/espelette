@@ -16,6 +16,7 @@ struct DrawBackendData
     GLuint shader {};
     GLint textureLocation {};
     GLint matLocation {};
+    GLint isTexturedLocation {};
 };
 
 static DrawBackendData drawData {};
@@ -36,8 +37,14 @@ void submit(DrawList& drawList)
 
     for(const DrawCommand& command : drawList.commands)
     {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, command.imageHandle);
+        bool textured = command.imageHandle != 0;
+        glUniform1i(drawData.isTexturedLocation, textured);
+        if (textured)
+        {
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, command.imageHandle);
+        }
+
 
         glUniformMatrix4fv(drawData.matLocation, 1, false, glm::value_ptr(command.projMat));
 
@@ -71,10 +78,14 @@ static const char* fragmentShader =
         "in vec2 fragUV;\n"
         "in vec4 fragColor;\n"
         "uniform sampler2D tex;\n"
+        "uniform bool isTextured;\n"
         "out vec4 outColor;\n"
         "void main()\n"
         "{\n"
-        "   outColor = fragColor * texture(tex, fragUV);\n"
+        "   if (isTextured)\n"
+        "       outColor = fragColor * texture(tex, fragUV);\n"
+        "   else"
+        "       outColor = fragColor;\n"
         "}\n";
 
 static GLuint createShaderProgram()
@@ -129,6 +140,7 @@ void drawBackendInit()
         drawData.shader = createShaderProgram();
         drawData.textureLocation = glGetUniformLocation(drawData.shader, "tex");
         drawData.matLocation = glGetUniformLocation(drawData.shader, "projMat");
+        drawData.isTexturedLocation = glGetUniformLocation(drawData.shader, "isTextured");
 
         drawData.initialized = true;
     }
