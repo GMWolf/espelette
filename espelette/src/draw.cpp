@@ -5,6 +5,44 @@
 #include <draw.h>
 #include <glm/gtx/transform.hpp>
 #include <image.h>
+#include "draw_list.h"
+
+union DrawListStorage
+{
+    char buf[sizeof(DrawList)] {};
+    DrawList drawList;
+
+    constexpr DrawListStorage() noexcept : buf() {};
+    ~DrawListStorage() noexcept {};
+} drawListStorage;
+
+DrawList& drawList = drawListStorage.drawList;
+
+void drawInit()
+{
+    new (&drawListStorage.drawList) DrawList();
+}
+
+void drawShutdown()
+{
+    drawListStorage.drawList.~DrawList();
+}
+
+
+void drawSprite(const Image *image, const glm::vec2 &pos)
+{
+    drawList.sprite(image, pos);
+}
+
+void drawSprite(const Image *image, const glm::vec2 &pos, const glm::vec2 &size)
+{
+    drawList.sprite(image, pos, size);
+}
+
+void setView(float left, float top, float right, float bottom)
+{
+    drawList.setView(left, top, right, bottom);
+}
 
 void DrawList::rect(const glm::vec2 &a, const glm::vec2 &b, const glm::u8vec4& col)
 {

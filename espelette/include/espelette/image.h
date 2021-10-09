@@ -6,6 +6,8 @@
 #define ESPELETTE_IMAGE_H
 
 #include <cstdint>
+#include "draw.h"
+
 
 struct Image
 {

@@ -2,7 +2,6 @@
 
 class App : public AppInterface
 {
-    DrawList drawList {};
     Image* image {};
     Image* logoImage {};
 
@@ -23,7 +22,6 @@ void App::init()
 
 void App::update()
 {
-
     if (keyDown(KEY::A))
         pos.x -= 1;
 
@@ -36,14 +34,11 @@ void App::update()
     if (keyDown(KEY::S))
         pos.y += 1;
 
-    drawList.setView(0, 0, width, height);
+    setView(0, 0, width, height);
 
-    drawList.sprite(image, pos);
-    drawList.sprite(logoImage, {170, 10});
-    drawList.sprite(logoImage, {320, 10}, glm::vec2(logoImage->width, logoImage->height) * 1.25f);
-
-    submit(drawList);
-    drawList.clear();
+    drawSprite(image, pos);
+    drawSprite(logoImage, {170, 10});
+    drawSprite(logoImage, {320, 10}, glm::vec2(logoImage->width, logoImage->height) * 1.25f);
 }
 
 void App::shutdown()

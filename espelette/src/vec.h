@@ -16,8 +16,8 @@ protected:
     size_t capacity {};
     char* memory {};
 public:
-    explicit RawVec(size_t elementSize) : elementSize(elementSize)
-    {}
+    explicit RawVec(size_t elementSize);
+    ~RawVec();
 
     void* get(size_t index);
     [[nodiscard]] const void* get(size_t index) const;

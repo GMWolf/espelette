@@ -10,6 +10,7 @@
 #include <stb_image.h>
 
 #include "input_state.h"
+#include "draw_backend.h"
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -36,9 +37,6 @@ static void setWindowIcon(GLFWwindow* window, const char* file)
     }
     stbi_image_free(logoImage.pixels);
 }
-
-void drawInit();
-void drawShutdown();
 
 int run(AppInterface& app)
 {
@@ -68,6 +66,7 @@ int run(AppInterface& app)
     gladLoadGL(glfwGetProcAddress);
 
     drawInit();
+    drawBackendInit();
 
     app.init();
 
@@ -87,12 +86,16 @@ int run(AppInterface& app)
 
         app.update();
 
+        submit(drawList);
+        drawList.clear();
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
     app.shutdown();
 
+    drawBackendShutdown();
     drawShutdown();
 
     glfwDestroyWindow(window);

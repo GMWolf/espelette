@@ -2,7 +2,7 @@
 // Created by felix on 07/10/2021.
 //
 
-#include <draw.h>
+#include "draw_backend.h"
 
 #include <glad/gl.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -19,6 +19,7 @@ struct DrawBackendData
 };
 
 static DrawBackendData drawData {};
+
 
 void submit(DrawList& drawList)
 {
@@ -99,7 +100,7 @@ static GLuint createShaderProgram()
     return program;
 }
 
-void drawInit()
+void drawBackendInit()
 {
     if (!drawData.initialized)
     {
@@ -134,7 +135,7 @@ void drawInit()
 }
 
 
-void drawShutdown()
+void drawBackendShutdown()
 {
     if (drawData.initialized)
     {

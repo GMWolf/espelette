@@ -5,6 +5,14 @@
 #include "vec.h"
 #include <cstdlib>
 
+RawVec::RawVec(size_t elementSize) : elementSize(elementSize)
+{}
+
+RawVec::~RawVec()
+{
+    free(memory);
+}
+
 void *RawVec::get(size_t index)
 {
     return memory + elementSize * index;
@@ -74,3 +82,4 @@ void RawVec::clear() {
 void *RawVec::getBack() {
     return get(elementCount - 1);
 }
+
