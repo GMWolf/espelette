@@ -15,7 +15,7 @@ struct InputState
     uint32_t keyPressedFrame[static_cast<int>(KEY::COUNT)]{0};
     uint32_t keyReleasedFrame[static_cast<int>(KEY::COUNT)]{0};
 
-    int frame = 0;
+    int frame = 1;
 };
 
 extern InputState inputState;

@@ -7,12 +7,18 @@
 
 #include <glm/vec2.hpp>
 
+enum class AppFlow
+{
+    CONTINUE,
+    CLOSE,
+};
+
 struct AppInterface
 {
     glm::ivec2 windowSize{};
     void (*init)(){};
     void (*shutdown)(){};
-    void (*update)(){};
+    AppFlow (*update)(){};
 };
 
 int run(const AppInterface& app);

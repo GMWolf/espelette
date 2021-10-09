@@ -79,8 +79,6 @@ int run(const AppInterface& app)
 
     while(!glfwWindowShouldClose(window))
     {
-        inputState.frame++;
-
         int width, height;
         glfwGetWindowSize(window, &width, &height);
 
@@ -91,12 +89,16 @@ int run(const AppInterface& app)
 
         glViewport(0, 0, width, height);
 
-        app.update();
+        AppFlow flow = app.update();
 
         submit(drawList);
         drawList.clear();
 
+        if (flow == AppFlow::CLOSE)
+            glfwSetWindowShouldClose(window, GLFW_TRUE);
+
         glfwSwapBuffers(window);
+        inputState.frame++;
         glfwPollEvents();
     }
 

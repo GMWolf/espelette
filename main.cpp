@@ -17,19 +17,24 @@ void shutdown()
     freeImage(logoImage);
 }
 
-void update()
+void updatePos()
 {
-    if (keyDown(KEY::A))
+    if (keyDown(KEY::A) || keyDown(KEY::LEFT))
         pos.x -= 1;
-
-    if (keyDown(KEY::D))
+    if (keyDown(KEY::D) || keyDown(KEY::RIGHT))
         pos.x += 1;
-
-    if (keyDown(KEY::W))
+    if (keyDown(KEY::W) || keyDown(KEY::UP))
         pos.y -= 1;
-
-    if (keyDown(KEY::S))
+    if (keyDown(KEY::S) || keyDown(KEY::DOWN))
         pos.y += 1;
+}
+
+AppFlow update()
+{
+    if (keyPressed(KEY::ESCAPE))
+        return AppFlow::CLOSE;
+
+    updatePos();
 
     setView(0, 0, windowSize().x,  windowSize().y);
 
@@ -37,6 +42,8 @@ void update()
     drawSprite(logoImage, {320, 10}, glm::vec2(logoImage->width, logoImage->height) * 1.25f);
 
     drawSprite(image, pos);
+
+    return AppFlow::CONTINUE;
 }
 
 int main()
