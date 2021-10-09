@@ -2,12 +2,29 @@
 // Created by felix on 06/10/2021.
 //
 
-#include "app.h"
+#include <app.h>
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <cstdio>
 #include <stb_image.h>
+
+#include "input_state.h"
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    switch(action)
+    {
+        case GLFW_PRESS:
+            inputState.keyPressedFrame[key] = inputState.frame;
+            break;
+        case GLFW_RELEASE:
+            inputState.keyReleasedFrame[key] = inputState.frame;
+            break;
+        default:
+            break;
+    }
+}
 
 static void setWindowIcon(GLFWwindow* window, const char* file)
 {
@@ -43,6 +60,8 @@ int run(AppInterface& app)
         return 1;
     }
 
+    glfwSetKeyCallback(window, keyCallback);
+
     setWindowIcon(window, "logo.png");
 
     glfwMakeContextCurrent(window);
@@ -54,6 +73,8 @@ int run(AppInterface& app)
 
     while(!glfwWindowShouldClose(window))
     {
+        inputState.frame++;
+
         int width, height;
         glfwGetWindowSize(window, &width, &height);
         glClearColor(1.0, 1.0, 1.0, 1.0);

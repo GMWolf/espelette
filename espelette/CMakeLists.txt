@@ -9,7 +9,7 @@ add_library(espelette
         src/vec.cpp
         src/draw_backend.cpp
         include/espelette.h
-        src/stb_impl.cpp)
+        src/stb_impl.cpp include/espelette/input.h src/input.cpp src/input_state.h)
 
 target_include_directories(espelette PUBLIC include PRIVATE include/espelette)
 

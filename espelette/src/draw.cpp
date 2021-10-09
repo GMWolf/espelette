@@ -2,9 +2,9 @@
 // Created by felix on 06/10/2021.
 //
 
-#include "draw.h"
+#include <draw.h>
 #include <glm/gtx/transform.hpp>
-#include "image.h"
+#include <image.h>
 
 void DrawList::rect(const glm::vec2 &a, const glm::vec2 &b, const glm::u8vec4& col)
 {

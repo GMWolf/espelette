@@ -7,4 +7,5 @@
 #include "espelette/app.h"
 #include "espelette/draw.h"
 #include "espelette/image.h"
+#include "espelette/input.h"
 #endif //ESPELETTE_ESPELETTE_H

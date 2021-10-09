@@ -2,7 +2,7 @@
 // Created by felix on 06/10/2021.
 //
 
-#include "image.h"
+#include <image.h>
 #include <stb_image.h>
 
 #include <glad/gl.h>
