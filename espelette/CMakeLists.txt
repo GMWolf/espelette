@@ -5,7 +5,7 @@ add_library(espelette
         src/image.cpp
         include/espelette/app.h
         src/app.cpp
-        src/vec.h
+        include/espelette/vec.h
         src/vec.cpp
         src/draw_backend.cpp
         include/espelette.h
