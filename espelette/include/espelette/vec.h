@@ -53,6 +53,8 @@ public:
     void push_back(const T& t) { *static_cast<T*>(allocBack()) = t; }
     T* alloc_back(size_t n) { return static_cast<T*>(RawVec::allocBack(n)); };
 
+    T& operator[](size_t index){ return *static_cast<T*>(get(index)); };
+
     T& back(){ return *static_cast<T*>(getBack()); }
 };
 #endif //ESPELETTE_VEC_H
