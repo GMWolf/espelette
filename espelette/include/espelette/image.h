@@ -16,7 +16,13 @@ struct Image
     uint32_t handle;
 };
 
-Image* loadImage(const char* path);
+enum class ImageFiltering
+{
+    Nearest,
+    Linear,
+};
+
+Image* loadImage(const char* path, ImageFiltering filtering = ImageFiltering::Linear);
 void freeImage(Image* image);
 
 #endif //ESPELETTE_IMAGE_H
