@@ -5,7 +5,7 @@
 #include "vec.h"
 #include <cstdlib>
 
-RawVec::RawVec(size_t elementSize) : elementSize(elementSize)
+RawVec::RawVec(size_t elementSize) noexcept : elementSize(elementSize)
 {}
 
 RawVec::~RawVec()
