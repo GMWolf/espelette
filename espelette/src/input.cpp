@@ -32,3 +32,23 @@ glm::vec2 mousePos()
 {
     return inputState.mousePos;
 }
+
+bool mouseDown(MOUSE_BUTTON button)
+{
+    return inputState.mouseReleasedFrame[static_cast<int>(button)] < inputState.keyReleasedFrame[static_cast<int>(button)];
+}
+
+bool mouseUp(MOUSE_BUTTON button)
+{
+    return !mouseDown(button);
+}
+
+bool mousePressed(MOUSE_BUTTON button)
+{
+    return inputState.mousePressedFrame[static_cast<int>(button)] == inputState.frame;
+}
+
+bool mouseReleased(MOUSE_BUTTON button)
+{
+    return inputState.mouseReleasedFrame[static_cast<int>(button)] == inputState.frame;
+}

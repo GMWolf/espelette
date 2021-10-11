@@ -8,7 +8,8 @@
 #include <glm/vec2.hpp>
 #include <cstdint>
 
-enum class KEY {
+enum class KEY
+{
     UNKNOWN = -1,
     SPACE = 32,
     APOSTROPHE = 39,
@@ -131,7 +132,13 @@ enum class KEY {
     RIGHT_ALT = 346,
     RIGHT_SUPER = 347,
     MENU = 348,
-    LAST = MENU,
+    COUNT,
+};
+
+enum class MOUSE_BUTTON
+{
+    LEFT = 0,
+    RIGHT = 1,
     COUNT,
 };
 
@@ -141,5 +148,10 @@ enum class KEY {
 [[nodiscard]] bool keyReleased(KEY key);
 
 [[nodiscard]] glm::vec2 mousePos();
+[[nodiscard]] bool mouseDown(MOUSE_BUTTON button);
+[[nodiscard]] bool mouseUp(MOUSE_BUTTON button);
+[[nodiscard]] bool mousePressed(MOUSE_BUTTON button);
+[[nodiscard]] bool mouseReleased(MOUSE_BUTTON button);
+
 
 #endif //ESPELETTE_INPUT_H

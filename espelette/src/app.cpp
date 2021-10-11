@@ -34,6 +34,21 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
     }
 }
 
+void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+{
+    switch(action)
+    {
+        case GLFW_PRESS:
+            inputState.mousePressedFrame[button] = inputState.frame;
+            break;
+        case GLFW_RELEASE:
+            inputState.mouseReleasedFrame[button] = inputState.frame;
+            break;
+        default:
+            break;
+    }
+}
+
 static void setWindowIcon(GLFWwindow* window, const char* file)
 {
     GLFWimage logoImage;
@@ -68,6 +83,7 @@ int run(const AppInterface& app)
     }
 
     glfwSetKeyCallback(window, keyCallback);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
 
     const char* iconPath = app.icon ? app.icon : "logo.png";
     setWindowIcon(window, iconPath);
@@ -86,6 +102,10 @@ int run(const AppInterface& app)
         glfwGetWindowSize(window, &width, &height);
 
         appGlobals.windowSize = {width, height};
+
+        double mouseX, mouseY;
+        glfwGetCursorPos(window, &mouseX, &mouseY);
+        inputState.mousePos = glm::vec2(mouseX, mouseY);
 
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);

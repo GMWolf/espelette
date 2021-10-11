@@ -15,6 +15,9 @@ struct InputState
     uint32_t keyPressedFrame[static_cast<int>(KEY::COUNT)]{0};
     uint32_t keyReleasedFrame[static_cast<int>(KEY::COUNT)]{0};
 
+    uint32_t mousePressedFrame[static_cast<int>(MOUSE_BUTTON::COUNT)]{0};
+    uint32_t mouseReleasedFrame[static_cast<int>(MOUSE_BUTTON::COUNT)]{0};
+
     int frame = 1;
 };
 
