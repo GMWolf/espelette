@@ -11,13 +11,19 @@
 class RawVec
 {
 protected:
-    size_t elementSize {};
+    const size_t elementSize {};
     size_t elementCount {};
     size_t capacity {};
     char* memory {};
 public:
     explicit RawVec(size_t elementSize) noexcept;
     ~RawVec() noexcept;
+
+    RawVec(const RawVec&) noexcept;
+    RawVec(RawVec&&) noexcept;
+
+    RawVec& operator=(const RawVec&) noexcept;
+    RawVec& operator=(RawVec&&) noexcept;
 
     void* get(size_t index);
     [[nodiscard]] const void* get(size_t index) const;
@@ -44,8 +50,11 @@ template<class T>
 class Vec : public RawVec
 {
 public:
-    Vec() noexcept: RawVec(sizeof(T))
-    {}
+    Vec() noexcept: RawVec(sizeof(T)){}
+    Vec(Vec&&) noexcept = default;
+    Vec(const Vec&) noexcept = default;
+    Vec& operator=(Vec&&) noexcept = default;
+    Vec& operator=(const Vec&) noexcept = default;
 
     T* begin() { return static_cast<T*>(get(0)); }
     T* end() { return static_cast<T*>(get(size())); }

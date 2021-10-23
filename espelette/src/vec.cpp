@@ -4,9 +4,49 @@
 
 #include "vec.h"
 #include <cstdlib>
+#include <cstring>
+#include <cassert>
 
 RawVec::RawVec(size_t elementSize) noexcept : elementSize(elementSize)
 {}
+
+RawVec::RawVec(const RawVec & v) noexcept : elementSize(v.elementSize)
+{
+    resize(v.size());
+    memcpy(memory, v.memory, elementSize * v.elementCount);
+}
+
+
+RawVec::RawVec(RawVec && v) noexcept : elementSize(v.elementSize)
+{
+    memory = v.memory;
+    capacity = v.capacity;
+    elementCount = v.elementCount;
+    v.memory = nullptr;
+    v.capacity = 0;
+    v.elementCount = 0;
+}
+
+RawVec& RawVec::operator=(const RawVec& v) noexcept
+{
+    assert(v.elementSize == elementSize);
+    resize(v.size());
+    memcpy(memory, v.memory, elementSize * v.elementCount);
+    return *this;
+}
+
+RawVec &RawVec::operator=(RawVec && v) noexcept
+{
+    assert(v.elementSize == elementSize);
+    memory = v.memory;
+    capacity = v.capacity;
+    elementCount = v.elementCount;
+    v.memory = nullptr;
+    v.elementCount = 0;
+    v.capacity = 0;
+    return *this;
+}
+
 
 RawVec::~RawVec()
 {
@@ -54,7 +94,7 @@ void RawVec::reserve(size_t newSize)
 
 void RawVec::grow()
 {
-    size_t newCapacity = capacity == 0 ? 8 : capacity * 2;
+    size_t newCapacity = capacity < 8 ? 8 : capacity * 2;
     reserve(newCapacity);
 }
 
