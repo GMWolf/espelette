@@ -42,6 +42,7 @@ void drawSprite(const Image *image, const glm::vec2 &pos, const glm::vec2 &size)
 
 void drawRect(const glm::vec2 &a, const glm::vec2 &b, const glm::u8vec4 &color)
 {
+    drawList.setImage(nullptr);
     drawList.rect(a, b, color);
 }
 
