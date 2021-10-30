@@ -63,6 +63,7 @@ public:
     T* alloc_back(size_t n) { return static_cast<T*>(RawVec::allocBack(n)); };
 
     T& operator[](size_t index){ return *static_cast<T*>(get(index)); };
+    const T& operator[](size_t index) const{ return *static_cast<const T*>(get(index));};
 
     T& back(){ return *static_cast<T*>(getBack()); }
 };
