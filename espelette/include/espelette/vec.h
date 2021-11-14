@@ -59,6 +59,9 @@ public:
     T* begin() { return static_cast<T*>(get(0)); }
     T* end() { return static_cast<T*>(get(size())); }
 
+    const T* begin() const { return static_cast<const T*>(get(0)); }
+    const T* end() const { return static_cast<const T*>(get(size())); }
+
     void push_back(const T& t) { *static_cast<T*>(allocBack()) = t; }
     T* alloc_back(size_t n) { return static_cast<T*>(RawVec::allocBack(n)); };
 
