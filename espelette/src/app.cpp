@@ -11,6 +11,7 @@
 
 #include "input_state.h"
 #include "draw_backend.h"
+#include "font.h"
 
 struct AppGlobals
 {
@@ -93,8 +94,14 @@ int run(const AppInterface& app)
 
     drawInit();
     drawBackendInit();
+    initFontCache();
 
     app.init();
+
+    auto fnt = createFont("KaushanScript-Regular.ttf");
+    cacheCodePoint(fnt, 2);
+    cacheCodePoint(fnt, 1);
+
 
     while(!glfwWindowShouldClose(window))
     {
@@ -113,6 +120,9 @@ int run(const AppInterface& app)
         glViewport(0, 0, width, height);
 
         AppFlow flow = app.update();
+
+        drawList.setImage(getCacheTexture());
+        drawList.rect({0,0}, {512, 512}, {255,255,255,255});
 
         submit(drawList);
         drawList.clear();

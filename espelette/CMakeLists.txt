@@ -14,7 +14,7 @@ add_library(espelette
         src/input.cpp
         src/input_state.h
         src/draw_backend.h
-        src/draw_list.h)
+        src/draw_list.h src/font.cpp src/font.h src/rect_pack.h src/rect_pack.cpp)
 
 target_include_directories(espelette PUBLIC include PRIVATE include/espelette)
 

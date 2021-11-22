@@ -22,6 +22,7 @@ enum class ImageFiltering
     Linear,
 };
 
+Image* createImage(uint16_t width, uint16_t height, ImageFiltering filtering, size_t channels, void* data);
 Image* loadImage(const char* path, ImageFiltering filtering = ImageFiltering::Linear);
 void freeImage(Image* image);
 
